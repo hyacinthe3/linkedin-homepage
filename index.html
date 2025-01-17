@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkedIn-Like Home Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #f3f2ef;
+            color: #333;
+        }
+        .both{
+            display: flex;
+            width:100%;
+        }
+
+        header {
+            position: sticky;
+            top: 0; /* Stick to the top of the viewport */
+            z-index: 1000; /* Ensure it stays above other elements */
+            width:75%;
+            background-color: rgb(255, 255, 255);
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+           
+        }
+        .header a.active {
+            border-bottom: 4px solid #1DA1F2;
+        }
+
+        .other{
+            width:24%;
+            background-color: rgb(255, 255, 255);
+            border-left: 1px solid gray;
+        }
+
+        header .logo {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        header .search-bar {
+            flex-grow: 1;
+            margin: 0 20px;
+        }
+
+        header .search-bar input {
+            width: 40%;
+            padding: 8px;
+            border: none;
+            border-radius: 4px;
+            background-color: rgb(243, 247, 249);
+        }
+
+        header nav {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+    }
+
+    header nav a {
+        color: gray;
+        text-decoration: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-weight: 500;
+        font-size: 12px;
+    }
+
+    header nav i {
+        font-size: 18px;
+        margin-bottom: 5px;
+    }
+
+    header nav a:hover {
+        color: #333;
+    }
+
+
+        main {
+            display: flex;
+            padding: 20px 40px;
+            gap: 15px;
+            justify-content: space-between;
+        }
+
+        aside {
+            width: 18%;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .feed {
+            width: 40%;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            background: white;
+        }
+
+        .feed-post {
+            margin-bottom: 15px;
+        }
+
+        .feed-post h3 {
+            margin: 0;
+        }
+
+        .feed-post p {
+            margin: 5px 0 0;
+        }
+
+        .suggestions {
+            width: 25%;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .side, .side1, .side2 {
+            width: 18%;
+            height: auto;
+            padding: 10px;
+            margin: 10px 0 10px 3%;
+            border-radius: 7px;
+            background: white;
+            box-shadow: 0.5px 1px 1.5px rgba(0, 0, 0, 0.1);
+            font-size: 11px;
+        }
+
+        .side a {
+            text-decoration: none;
+            color: black;
+        }
+
+        .side2 {
+            height: 110px;
+        }
+        .feed .update button{
+            width:35%;
+            height: 40px;
+            background-color: rgb(104, 104, 244);
+            border-radius: 20px;
+            border: none;
+            color: white;
+            font-weight: 400;
+        }
+      
+
+
+    .post-section {
+        width: 37%;
+        display: flex;
+        flex-direction: column; /* Stack elements vertically */
+        background: white;
+        padding: 15px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);    
+        border-radius: 8px;
+        margin-bottom: 15px;
+        margin-bottom: 15px;
+        cursor: pointer;
+        margin-left: 27%;
+        margin-top: -299px;
+    }
+
+
+    .start-post {
+        width: 80%;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: #f3f2ef;
+        padding: 10px 15px;
+        border-radius:20px;
+        margin-bottom: 15px; /* Space between sections */
+        margin-left: 10%;
+        margin-top: -40px;
+    }
+
+     .profile-circle {
+        width: 40px;
+        height: 40px;
+        background: #ccc;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: bold;
+        font-size: 16px;
+        color: white;
+    }
+
+    .start-post input {
+        width: 80%;
+        border: none;
+        background: transparent;
+        font-size: 14px;
+        color: #333;
+        outline: none;
+    }
+
+    .post-options {
+        display: flex;
+        gap: 20px; /* Space between items */
+        align-items: flex-start; /* Align items to the top */
+        justify-content: flex-start; /* Align items to the left */
+    }
+
+    .post-options .option {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start; /* Align text/icons to the left */
+        font-size: 12px;
+        color: #666;
+        cursor: pointer;
+    }
+
+    .post-options .option i {
+        font-size: 20px;
+        margin-bottom: 5px;
+    }
+
+    .post-options .option:hover {
+        color: #333;
+    }
+    .work{
+        width: 39%;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);    
+        background-color: white;       
+        border-radius: 8px;
+        margin-left: 27%;
+        padding: 5px;
+    }
+    .work p{
+        margin-top: -40px;
+        margin-left: 50px;
+    }
+    .work h6{
+        margin-top: -15px;
+        margin-left: 50px;
+        
+    }
+    .post-interactions {
+        background: white;
+        padding: 10px 15px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        font-family: 'Roboto', sans-serif;
+        font-size: 14px;
+        color: #333;
+    }
+
+    .engagement-stats {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 13px;
+        color: gray;
+    }
+
+    .engagement-stats span {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .engagement-stats i {
+        font-size: 16px;
+    }
+
+    hr {
+        border: none;
+        border-top: 1px solid #e0e0e0;
+        margin: 10px 0;
+    }
+
+    .actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: #666;
+    }
+
+    .action {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        cursor: pointer;
+    }
+
+    .action i {
+        font-size: 16px;
+        margin-bottom: 5px;
+    }
+
+    .action span {
+        font-size: 12px;
+    }
+
+    .action:hover {
+        color: #333;
+    }
+
+    .main .suggestions.recommendations {
+        background: white;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        font-family: 'Roboto', sans-serif;
+        font-size: 14px;
+        color: #333;
+    }
+
+    .main .suggestions.recommendations h3 {
+        margin: 0 0 15px;
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    .main .suggestions.recommendation {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+        gap: 10px;
+    }
+
+    .main .suggestions.icon img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    .main .suggestions.details {
+        flex: 1;
+    }
+
+    .details strong {
+        font-size: 14px;
+        display: block;
+    }
+
+    .details p {
+        font-size: 12px;
+        color: gray;
+        margin: 5px 0 0;
+    }
+
+    .follow-btn {
+        border: 1px solid #0073b1;
+        background: white;
+        color: #0073b1;
+        border-radius: 15px;
+        padding: 5px 10px;
+        font-size: 12px;
+        cursor: pointer;
+        transition: background-color 0.2s, color 0.2s;
+    }
+
+    .follow-btn:hover {
+        background: #0073b1;
+        color: white;
+    }
+
+    .view-more {
+        display: block;
+        text-align: center;
+        margin-top: 15px;
+        font-size: 13px;
+        color: #0073b1;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    .view-more:hover {
+        text-decoration: underline;
+    }
+  .add{
+    width: 26%;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+   
+    margin-left: 71%;
+    margin-top: -710px;
+  }
+  .add img{
+    border-radius: 8px;
+  }
+  .tip{
+    width: 26%;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  
+        margin-left: 71%;
+      /*   margin-top: -710px; */
+  }
+  .footer{
+    width: 26%;
+    margin-left: 75%;
+  }
+    </style>
+</head>
+<body>
+    <div class="both">
+    <header>
+        <div class="logo"><img src="logo.png" alt="" width="40" height="40"></div>
+        <div class="search-bar">
+            <input type="text" placeholder="Search">
+        </div>
+        <nav>
+            <div>
+                <a href="#"active>
+                    <i class="fa-solid fa-house-chimney"></i>
+                    <div>Home</div>
+                </a>
+            </div>
+            <div>
+                <a href="#">
+                    <i class="fa-solid fa-user-friends"></i>
+                    <div>My Network</div>
+                </a>
+            </div>
+            <div>
+                <a href="#">
+                    <i class="fa-solid fa-briefcase"></i>
+                    <div>Jobs</div>
+                </a>
+            </div>
+            <div>
+                <a href="#">
+                    <i class="fa-solid fa-comment-dots"></i>
+                    <div>Messaging</div>
+                </a>
+            </div>
+            <div>
+                <a href="#">
+                    <i class="fa-solid fa-bell"></i>
+                    <div>Notifications</div>
+                </a>
+            </div>
+            <div>
+                <a href="#">
+                    <i class="fa-solid fa-user"></i>
+                    <div>Me</div>
+                </a>
+            </div>
+        </nav>
+    </header>
+    <div class="other">
+        
+        <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px; border: 1px solid #f9f9f9; border-radius: 8px; width: 250px; font-family: Arial, sans-serif;">
+            <div style="text-align: center;">
+                <!-- Icon Container -->
+                <div style="width: 24px; height: 24px; background-color: #ccc; border-radius: 4px; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
+                    <div style="width: 16px; height: 16px; background-color: #999;"></div>
+                </div>
+                <!-- Text Beneath Icon -->
+                <span style="font-size: 14px; display: block; margin-top: 5px; color: #333;">For Business</span>
+            </div>
+            <div style="text-align: center;">
+                <!-- Small Button -->
+                <button style="background-color: #f0b000; border: none; border-radius: 50%; padding: 5px; width: 20px; height: 20px; cursor: pointer;"></button>
+                <!-- Text Beneath Button -->
+                <div style="font-size: 12px; color: #333; margin-top: 5px;">Try Premium for $0</div>
+            </div>
+        </div>
+        
+        
+    </div>
+    
+</div>
+    <main>
+        <aside>
+            <div style="border: 1px solid #faf9f9; border-radius: 8px; padding: 16px; width: 180px; font-family: Arial, sans-serif;">
+                <div style="text-align: center;">
+                    <div style="background-color: #4A90E2; border-radius: 50%; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; font-weight: bold;">
+                        I
+                    </div>
+                </div>
+                <h3 style="margin: 10px 0; font-size: 20px;">Ihimbazwe Hyacinthe</h3><br>
+                <p style="margin: 5px 0; font-size: 16px; font-style: italic;">Software Developer at klab</p><br>
+                <p style="margin: 5px 0; font-size: 14px; color: #666;">Kigali, Kigali City</p>
+                <p style="margin: 5px 0; font-size: 14px; color: #0073B1;">klab</p>
+            </div>
+        </aside>
+
+        <div class="feed">
+            
+            <div class="feed-post">
+                <h3>Prepare your job search</h3>
+                <center><img src="search.png" alt="" width="480" height="170"></center>
+            </div>
+            <div class="feed-post">
+                
+                <p>Add your work experience and skills to show your strengths to recruiters..</p>
+                
+            </div>
+            <div class="update">
+                   <button>
+                    Update Profile
+                   </button> 
+            </div>
+        </div>
+        
+
+        <div class="suggestions">
+            <div class="recommendations">
+                <h3>Add to your feed</h3>
+                <div class="recommendation">
+                    <div class="icon">
+                        
+                    </div>
+                    <div class="details">
+                        <strong>Microsoft</strong>
+                        <p>Company • Software Development</p>
+                    </div>
+                    <button class="follow-btn">+ Follow</button>
+                </div>
+                <div class="recommendation">
+                    <div class="icon">
+                       
+                    </div>
+                    <div class="details">
+                        <strong>Amine BOUDER</strong>
+                        <p>No.1 in Manufacturing, Logistics, and Supply Chain Management 💙</p>
+                    </div>
+                    <button class="follow-btn">+ Follow</button>
+                </div>
+                <div class="recommendation">
+                    <div class="icon">
+                       
+                    </div>
+                    <div class="details">
+                        <strong>Francesco Galtieri (Ph.D.)</strong>
+                        <p>UNFPA Representative</p>
+                    </div>
+                    <button class="follow-btn">+ Follow</button>
+                </div>
+                <a href="#" class="view-more">View all recommendations →</a>
+            </div>
+            
+        </div>
+    </main>
+
+    <div class="side">
+        <font color="gray">
+            <p><a href="#"><b>Connections</b></a></p>
+            <p>Grow your network</p>
+        </font>
+    </div>
+
+    <div class="side1">
+        <font color="gray">
+            Network smarter with Premium
+        </font><br><br>
+        <font color="black"><b>Try 1 month Premium for $0</b></font>
+    </div>
+
+    <div class="side2">
+        <font color="black"><br>
+        <i class="fa-sharp fa-solid fa-bookmark"></i> Saved items <br><br>
+        <i class="fa-sharp fa-solid fa-people-group"></i> Groups <br><br>
+        <i class="fa-sharp fa-regular fa-newspaper"></i>Newsletter <br><br>
+        <i class="fa-solid fa-calendar" ></i>  Events
+          </font>
+    </div>
+    <div class="post-section">
+        <div class="profile-circle">I</div>
+        <div class="start-post">
+            
+            <input type="text" placeholder="Start a post" readonly>
+        </div>
+        <div class="post-options">
+            <div class="option">
+                <i class="fa-solid fa-photo-film" style="color: #0073b1;"></i>
+                <span>Media</span>
+            </div>
+            <div class="option">
+                <i class="fa-solid fa-calendar" style="color: #e7a33e;"></i>
+                <span>Event</span>
+            </div>
+            <div class="option">
+                <i class="fa-solid fa-newspaper" style="color: #f35f47;"></i>
+                <span>Write article</span>
+            </div>
+        </div>
+    </div>
+    <div class="work">
+        <img src="work.png" alt=""width="40"heigth="40"><b><p>Work from home/fresher jobs-remote works</b></p>
+        <h6><font color="gray"> 4,506,809 followers</h6></font>
+        <h6><font color="gray">5h</h6></font>
+       <h6> TCS GROUP is hiring for various positions for freshers & experienced 2025 - hashtag#Salary : ₹25,000 - ₹110,000 per month (In-hand) + Incentives</h6>
+       <center><img src="station.png" alt=""width="460" height="350"></center>
+       <div class="post-interactions">
+        <div class="engagement-stats">
+            <span><i class="fa-solid fa-thumbs-up" style="color: #0073b1;"></i> 44</span>
+            <span>86 comments • 1 repost</span>
+        </div>
+        <hr>
+        <div class="actions">
+            <div class="action">
+                <i class="fa-regular fa-thumbs-up"></i>
+                <span>Like</span>
+            </div>
+            <div class="action">
+                <i class="fa-regular fa-comment"></i>
+                <span>Comment</span>
+            </div>
+            <div class="action">
+                <i class="fa-solid fa-retweet"></i>
+                <span>Repost</span>
+            </div>
+            <div class="action">
+                <i class="fa-regular fa-paper-plane"></i>
+                <span>Send</span>
+            </div>
+        </div>
+    </div>
+    
+    </div>
+    <div class="add">
+        <img src="pipo.png" alt="" width="326" height="298">
+    </div><br>
+    <div class="tip"><br>
+   <font color="gray"><center> Try LinkedIn on the windows App</center></font><br>
+    </div>
+   <div class="footer"><pre> <font color="gray">
+About Accessibility   Help Center
+
+Privacy & Terms   Ad Choices
+
+Advertising  Business Services 
+
+Get the LinkedIn app  More
+
+LinkedIn Corporation © 2025</font></pre>
+    </footer>
+</body>
+</html>
